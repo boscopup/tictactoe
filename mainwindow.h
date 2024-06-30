@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtCore>
+#include <QtGui>
+#include <vector>
+#include "myboard.h"
+#include "mybox.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,5 +24,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *scene;
+    MyBoard *board;
+    std::vector<MyBox *> boxes;
 };
 #endif // MAINWINDOW_H

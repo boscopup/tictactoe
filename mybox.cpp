@@ -8,8 +8,9 @@
 #include "resources.h"
 #include "game.h"
 
-MyBox::MyBox(QObject *parent, int index)
+MyBox::MyBox(QObject *parent, Game *game, int index)
 {
+    m_game = game;
     int x = 0;
     int y = 0;
 
@@ -104,7 +105,7 @@ void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         } else {
             boxStatus_ = BoxStatus::o;
         }
-        Game::changePlayerTurn();
+        m_game->changePlayerTurn();
         update();
         qDebug() << "Emitting handleBoxChangedEvent()\n";
         emit handleBoxChangedEvent();

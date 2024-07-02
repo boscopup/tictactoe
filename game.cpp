@@ -53,6 +53,14 @@ void Game::addBox(MyBox *box)
 void Game::handlePlayerSelectionMade()
 {
     qDebug() << "Game::handlePlayerSelectionMade called\n";
+    // TODO: Determine is anyone has won yet or if gameboard is full
+
+    // Otherwise, update the player turn display
+    if (m_playerTurn == gameboard::x) {
+        emit updateParentPlayerDisplay(xImage);
+    } else {
+        emit updateParentPlayerDisplay(oImage);
+    }
 }
 
 MyBox *Game::getBox(QPointF pos)

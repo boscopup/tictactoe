@@ -3,8 +3,9 @@
 #include "resources.h"
 #include <vector>
 #include <QObject>
-#include "mybox.h"
 #include <QPixmap>
+
+class MyBox; // Game holds a vector of MyBox pointers, and MyBox holds a Game pointer
 
 class Game : public QObject
 {
@@ -21,8 +22,10 @@ public:
     MyBox *getBox(QPointF pos);
     static QPixmap* xImage;
     static QPixmap* oImage;
+signals:
+    void updateParentPlayerDisplay(QPixmap *img);
 public slots:
-    static void handlePlayerSelectionMade();
+    void handlePlayerSelectionMade();
 
 };
 

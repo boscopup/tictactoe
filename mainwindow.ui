@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>120</y>
+      <y>150</y>
       <width>441</width>
       <height>431</height>
      </rect>
@@ -46,8 +46,8 @@ font: 700 36pt &quot;Roboto&quot;;</string>
      <rect>
       <x>420</x>
       <y>10</y>
-      <width>101</width>
-      <height>101</height>
+      <width>110</width>
+      <height>110</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -57,10 +57,10 @@ font: 700 36pt &quot;Roboto&quot;;</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/Resources/x.png);</string>
+     <string notr="true"/>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>80</x>

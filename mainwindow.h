@@ -27,8 +27,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *playerTurnScene;
     MyScene *scene;
     MyBoard *board;
     Game *game;
+public slots:
+    void updatePlayerDisplay(QPixmap *img);
 };
 #endif // MAINWINDOW_H

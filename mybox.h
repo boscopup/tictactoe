@@ -19,7 +19,7 @@ public:
 
 
 private:
-    enum BoxStatus {x, o, none};
+    enum class BoxStatus {x, o, none};
     BoxStatus boxStatus_;
     int boxIndex_;
     bool pressed_;

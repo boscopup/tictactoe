@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QFont> // Won't need this later
 #include "resources.h"
+#include "game.h"
 
 MyBox::MyBox(QObject *parent, int index)
 {
@@ -13,6 +14,7 @@ MyBox::MyBox(QObject *parent, int index)
     int y = 0;
 
     boxIndex_ = index;
+    boxStatus_ = BoxStatus::none;
 
     // For boxes 1-3, y is box1_start
     // For boxes 4-6, y is box2_start
@@ -71,21 +73,19 @@ QRectF MyBox::boundingRect() const
 
 void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRectF rec = this->boundingRect();
-    QBrush brush(Qt::blue);
-    QPen pen;
-    QFont font = painter->font();
-
-    pen.setWidth(0);
-    painter->setBrush(brush);
-    painter->setPen(pen);
-    painter->drawRect(rec);
-    pen.setWidth(3);
-    pen.setColor(Qt::black);
-    painter->setPen(pen);
-    font.setPointSize(16);
-    painter->setFont(font);
-    painter->drawText(rec, QString::number(boxIndex_));
+    QRect rec = this->boundingRect().toRect();
+    switch(boxStatus_) {
+    case BoxStatus::none:
+        // Don't draw anything
+        break;
+    case BoxStatus::x:
+        qDebug() << "Drawing X\n";
+        painter->drawPixmap(rec, *Game::xImage);
+        break;
+    case BoxStatus::o:
+        painter->drawPixmap(rec, *Game::oImage);
+        break;
+    }
 }
 
 void MyBox::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -99,6 +99,13 @@ void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     qDebug() << "mouseReleaseEvent called. pressed_ = " << pressed_ << "\n";
     if (pressed_) {
         pressed_ = false;
+        if (Game::getPlayerTurn() == gameboard::x) {
+            boxStatus_ = BoxStatus::x;
+        } else {
+            boxStatus_ = BoxStatus::o;
+        }
+        Game::changePlayerTurn();
+        update();
         qDebug() << "Emitting handleBoxChangedEvent()\n";
         emit handleBoxChangedEvent();
     }

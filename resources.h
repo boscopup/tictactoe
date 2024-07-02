@@ -1,6 +1,8 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 
+#include <QPixmap>
+
 namespace gameboard {
     static const int box_width = 100;
     static const int line_width = 10;

@@ -2,18 +2,47 @@
 #include <QObject>
 #include <QDebug>
 #include "resources.h"
+#include <QPixmap>
 
 
-Game::Game() {}
+QPixmap *Game::xImage = nullptr;
+QPixmap *Game::oImage = nullptr;
+gameboard::PlayerType Game::m_playerTurn = gameboard::x;
+
+void Game::loadImages()
+{
+    if (xImage == nullptr) {
+        qDebug() << "Loading xImage\n";
+        xImage = new QPixmap(":/Resources/x.png");
+        if (xImage->isNull()) {
+            qDebug() << "Loading xImage FAILED\n";
+        }
+    }
+    if (oImage == nullptr) {
+        oImage = new QPixmap(":/Resources/o.png");
+        qDebug() << "Loading oImage\n";
+        if (oImage->isNull()) {
+            qDebug() << "Loading oImage FAILED\n";
+        }
+    }
+}
+
+Game::Game() {
+    loadImages();
+}
 
 gameboard::PlayerType Game::getPlayerTurn()
 {
-
+    return m_playerTurn;
 }
 
 void Game::changePlayerTurn()
 {
-
+    if (m_playerTurn == gameboard::x) {
+        m_playerTurn = gameboard::o;
+    } else {
+        m_playerTurn = gameboard::x;
+    }
 }
 
 void Game::addBox(MyBox *box)

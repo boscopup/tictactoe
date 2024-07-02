@@ -1,11 +1,12 @@
 #include "myboard.h"
 #include "resources.h"
 #include <QPen>
+#include <QGraphicsScene>
 
 MyBoard::MyBoard()
 {
     this->setRect(0,0,gameboard::board_width, gameboard::board_width);
-
+    setAcceptedMouseButtons(Qt::NoButton);
 }
 
 
@@ -37,4 +38,15 @@ void MyBoard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     painter->drawLine(line2);
     painter->drawLine(line3);
     painter->drawLine(line4);
+}
+
+
+void MyBoard::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    qDebug() << "MyBoard mouse press event called\n";
+}
+
+void MyBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    qDebug() << "MyBoard mouse release event called\n";
 }

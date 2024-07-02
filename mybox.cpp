@@ -7,19 +7,12 @@
 #include <QFont> // Won't need this later
 #include "resources.h"
 
-// 1   2   3
-// 4   5   6
-// 7   8   9
-
-
-
 MyBox::MyBox(QObject *parent, int index)
 {
-    int x,y;
+    int x = 0;
+    int y = 0;
 
     boxIndex_ = index;
-
-    this->setParent(parent);
 
     // For boxes 1-3, y is box1_start
     // For boxes 4-6, y is box2_start
@@ -67,11 +60,9 @@ MyBox::MyBox(QObject *parent, int index)
     x -= 5;
     y -= 5;
 
-    qDebug() << "x=" << x << ", y=" << y;
     setPos(mapToParent(x,y));
+    setFlag(ItemIsSelectable);
 }
-
-
 
 QRectF MyBox::boundingRect() const
 {
@@ -99,8 +90,16 @@ void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 void MyBox::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    pressed_ = true;
+    qDebug() << "Box " << boxIndex_ << " clicked\n";
 }
 
 void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    qDebug() << "mouseReleaseEvent called. pressed_ = " << pressed_ << "\n";
+    if (pressed_) {
+        pressed_ = false;
+        qDebug() << "Emitting handleBoxChangedEvent()\n";
+        emit handleBoxChangedEvent();
+    }
 }

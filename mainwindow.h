@@ -7,6 +7,9 @@
 #include <vector>
 #include "myboard.h"
 #include "mybox.h"
+#include "game.h"
+#include "resources.h"
+#include "myscene.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,8 +27,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene;
+    MyScene *scene;
     MyBoard *board;
-    std::vector<MyBox *> boxes;
+    Game *game;
 };
 #endif // MAINWINDOW_H

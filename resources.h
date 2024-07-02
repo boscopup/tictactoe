@@ -11,5 +11,6 @@ namespace gameboard {
     static const int box1_end = box1_start + box_width;
     static const int box2_end = box2_start + box_width;
     static const int box3_end = box2_start + box_width;
+    enum PlayerType {x, o};
 }
 #endif // RESOURCES_H

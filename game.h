@@ -14,6 +14,9 @@ private:
     std::vector<MyBox *> m_boxes;
     static gameboard::PlayerType m_playerTurn;
     static void loadImages();
+    gameboard::PlayerType m_winner;
+    bool isWinner();
+
 public:
     Game();
     static gameboard::PlayerType getPlayerTurn();
@@ -22,6 +25,7 @@ public:
     MyBox *getBox(QPointF pos);
     static QPixmap* xImage;
     static QPixmap* oImage;
+
 signals:
     void updateParentPlayerDisplay(QPixmap *img);
 public slots:

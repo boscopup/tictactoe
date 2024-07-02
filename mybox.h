@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <QtCore>
 #include <QPainter>
+#include "resources.h"
 
 class Game; // Game holds a vector of MyBox pointers, and MyBox holds a Game pointer
 
@@ -18,11 +19,10 @@ public:
 
     // Header:
 
-
-
+    gameboard::PlayerType getValue();
 private:
-    enum class BoxStatus {x, o, none};
-    BoxStatus boxStatus_;
+
+    gameboard::PlayerType boxStatus_;
     int boxIndex_;
     bool pressed_;
     Game *m_game;

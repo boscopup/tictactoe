@@ -15,7 +15,7 @@ MyBox::MyBox(QObject *parent, Game *game, int index)
     int y = 0;
 
     boxIndex_ = index;
-    boxStatus_ = BoxStatus::none;
+    boxStatus_ = gameboard::none;
 
     // For boxes 1-3, y is box1_start
     // For boxes 4-6, y is box2_start
@@ -67,6 +67,11 @@ MyBox::MyBox(QObject *parent, Game *game, int index)
     setFlag(ItemIsSelectable);
 }
 
+gameboard::PlayerType MyBox::getValue()
+{
+    return boxStatus_;
+}
+
 QRectF MyBox::boundingRect() const
 {
     return QRectF(0, 0, gameboard::box_width, gameboard::box_width);
@@ -76,14 +81,14 @@ void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     QRect rec = this->boundingRect().toRect();
     switch(boxStatus_) {
-    case BoxStatus::none:
+    case gameboard::none:
         // Don't draw anything
         break;
-    case BoxStatus::x:
+    case gameboard::x:
         qDebug() << "Drawing X\n";
         painter->drawPixmap(rec, *Game::xImage);
         break;
-    case BoxStatus::o:
+    case gameboard::o:
         painter->drawPixmap(rec, *Game::oImage);
         break;
     }
@@ -101,9 +106,9 @@ void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (pressed_) {
         pressed_ = false;
         if (Game::getPlayerTurn() == gameboard::x) {
-            boxStatus_ = BoxStatus::x;
+            boxStatus_ = gameboard::x;
         } else {
-            boxStatus_ = BoxStatus::o;
+            boxStatus_ = gameboard::o;
         }
         m_game->changePlayerTurn();
         update();

@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "resources.h"
 #include <QPixmap>
+#include "mybox.h"
 
 
 QPixmap *Game::xImage = nullptr;
@@ -27,8 +28,47 @@ void Game::loadImages()
     }
 }
 
+bool Game::isWinner()
+{
+    gameboard::PlayerType one, two, three, four, five, six, seven, eight, nine;
+    one = m_boxes[0]->getValue();
+    two = m_boxes[1]->getValue();
+    three = m_boxes[2]->getValue();
+    four = m_boxes[3]->getValue();
+    five = m_boxes[4]->getValue();
+    six = m_boxes[5]->getValue();
+    seven = m_boxes[6]->getValue();
+    eight = m_boxes[7]->getValue();
+    nine = m_boxes[8]->getValue();
+
+    // TODO: Add which row or col or diag won
+    if ((one == two) && (one == three)) {               // row 1
+        m_winner = one;
+    } else if ((three == four) && (three == five)) {    // row 2
+        m_winner = three;
+    } else if ((seven == eight) && (seven == nine)) {   // row 3
+        m_winner = seven;
+    } else if ((one == four) && (one == seven)) {       // col 1
+        m_winner = one;
+    } else if ((two == five) && (two == eight)) {       // col 2
+        m_winner = two;
+    } else if ((three == 6) && (three == nine)) {       // col 3
+        m_winner = three;
+    } else if ((one == five) && (five == nine)) {       // diag 1
+        m_winner = one;
+    } else if ((three == five) && (three == seven)) {   // diag 2
+        m_winner = three;
+    }
+    if (m_winner != gameboard::none) {
+        return true;
+    }
+    return false;
+
+}
+
 Game::Game() {
     loadImages();
+    m_winner = gameboard::none;
 }
 
 gameboard::PlayerType Game::getPlayerTurn()
@@ -54,7 +94,19 @@ void Game::handlePlayerSelectionMade()
 {
     qDebug() << "Game::handlePlayerSelectionMade called\n";
     // TODO: Determine is anyone has won yet or if gameboard is full
+    if (isWinner()) {
+        char ch;
+        switch (m_winner) {
+        case gameboard::x:
+            ch = 'x';
+            break;
+        case gameboard::o:
+            ch = 'o';
+            break;
+        }
 
+        qDebug() << "Winner! " << ch << "\n";
+    }
     // Otherwise, update the player turn display
     if (m_playerTurn == gameboard::x) {
         emit updateParentPlayerDisplay(xImage);

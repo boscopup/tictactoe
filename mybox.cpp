@@ -85,7 +85,6 @@ void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
         // Don't draw anything
         break;
     case gameboard::x:
-        qDebug() << "Drawing X\n";
         painter->drawPixmap(rec, *Game::xImage);
         break;
     case gameboard::o:
@@ -97,12 +96,10 @@ void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 void MyBox::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     pressed_ = true;
-    qDebug() << "Box " << boxIndex_ << " clicked\n";
 }
 
 void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "mouseReleaseEvent called. pressed_ = " << pressed_ << "\n";
     if (pressed_) {
         pressed_ = false;
         if (Game::getPlayerTurn() == gameboard::x) {
@@ -112,7 +109,6 @@ void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         }
         m_game->changePlayerTurn();
         update();
-        qDebug() << "Emitting handleBoxChangedEvent()\n";
         emit handleBoxChangedEvent();
     }
 }

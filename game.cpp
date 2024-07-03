@@ -86,7 +86,7 @@ bool Game::isWinner()
     }
 
     if (m_winner != gameboard::none) {
-        // Draw line(s) across winning row/col/diag
+        // TODO: Draw line(s) across winning row/col/diag
         emit endRound(m_winner);
     }
     return false;

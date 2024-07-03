@@ -6,6 +6,8 @@
 #include <QObject>
 #include "game.h"
 #include <QGraphicsScene>
+#include <QMessageBox>
+#include <QPushButton>
 #include "myscene.h"
 
 
@@ -64,4 +66,32 @@ void MainWindow::endRound(gameboard::PlayerType winner)
     qDebug() << "Round over\n";
     // Update player scores
     // Pop up dialog with winner to see if they want to play again, otherwise exit
+    QMessageBox msgBox;
+    QString msg;
+    QPixmap *img;
+    if (winner == gameboard::x) {
+        msg = "X won!";
+        img = Game::xImage;
+    } else {
+        msg = "O won!";
+        img = Game::oImage;
+    }
+    msgBox.setText(msg);
+    msgBox.setInformativeText("Would you like to play another round?");
+    msgBox.setIconPixmap(*img);
+    QPushButton *anotherRoundButton = msgBox.addButton(tr("Another Round"), QMessageBox::AcceptRole);
+    QPushButton *resetGameButton = msgBox.addButton(tr("Reset Game"), QMessageBox::AcceptRole);
+    QPushButton *exitButton = msgBox.addButton(tr("Exit Game"), QMessageBox::AcceptRole);
+    msgBox.exec();
+
+    if (msgBox.clickedButton() == anotherRoundButton) {
+        // Play another round
+        qDebug() << "Play another round\n";
+    } else if (msgBox.clickedButton() == resetGameButton) {
+        // Reset the game
+        qDebug() << "Reset the game\n";
+    } else if (msgBox.clickedButton() == exitButton) {
+        // Exit the game
+        qDebug() << "Exit the game\n";
+    }
 }

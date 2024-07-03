@@ -33,5 +33,6 @@ private:
     Game *game;
 public slots:
     void updatePlayerDisplay(QPixmap *img);
+    void endRound(gameboard::PlayerType winner);
 };
 #endif // MAINWINDOW_H

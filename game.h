@@ -4,6 +4,8 @@
 #include <vector>
 #include <QObject>
 #include <QPixmap>
+#include <map>
+#include "mybox.h"
 
 class MyBox; // Game holds a vector of MyBox pointers, and MyBox holds a Game pointer
 
@@ -16,6 +18,8 @@ private:
     static void loadImages();
     gameboard::PlayerType m_winner;
     bool isWinner();
+    enum class Lines {row1, row2, row3, col1, col2, col3, diag1, diag2};
+    std::map<Lines, bool> m_lines;
 
 public:
     Game();
@@ -28,6 +32,7 @@ public:
 
 signals:
     void updateParentPlayerDisplay(QPixmap *img);
+    void endRound(gameboard::PlayerType winner);
 public slots:
     void handlePlayerSelectionMade();
 

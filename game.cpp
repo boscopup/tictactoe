@@ -3,12 +3,23 @@
 #include <QDebug>
 #include "resources.h"
 #include <QPixmap>
-#include "mybox.h"
-
 
 QPixmap *Game::xImage = nullptr;
 QPixmap *Game::oImage = nullptr;
 gameboard::PlayerType Game::m_playerTurn = gameboard::x;
+
+Game::Game() {
+    loadImages();
+    m_winner = gameboard::none;
+    m_lines[Lines::row1] = false;
+    m_lines[Lines::row2] = false;
+    m_lines[Lines::row3] = false;
+    m_lines[Lines::col1] = false;
+    m_lines[Lines::col2] = false;
+    m_lines[Lines::col3] = false;
+    m_lines[Lines::diag1] = false;
+    m_lines[Lines::diag2] = false;
+}
 
 void Game::loadImages()
 {
@@ -41,34 +52,45 @@ bool Game::isWinner()
     eight = m_boxes[7]->getValue();
     nine = m_boxes[8]->getValue();
 
-    // TODO: Add which row or col or diag won
-    if ((one == two) && (one == three)) {               // row 1
+    if ((one != gameboard::none) && (one == two) && (two == three)) {
+        m_lines[Lines::row1] = true;
         m_winner = one;
-    } else if ((three == four) && (three == five)) {    // row 2
-        m_winner = three;
-    } else if ((seven == eight) && (seven == nine)) {   // row 3
+    }
+    if ((four != gameboard::none) && (four == five) && (five == six)) {
+        m_lines[Lines::row2] = true;
+        m_winner = four;
+    }
+    if ((seven != gameboard::none) && (seven == eight) && (eight == nine)) {
+        m_lines[Lines::row3] = true;
         m_winner = seven;
-    } else if ((one == four) && (one == seven)) {       // col 1
+    }
+    if ((one != gameboard::none) && (one == four) && (four == seven)) {
+        m_lines[Lines::col1] = true;
         m_winner = one;
-    } else if ((two == five) && (two == eight)) {       // col 2
+    }
+    if ((two != gameboard::none) && (two == five) && (five == eight)) {
+        m_lines[Lines::col2] = true;
         m_winner = two;
-    } else if ((three == 6) && (three == nine)) {       // col 3
-        m_winner = three;
-    } else if ((one == five) && (five == nine)) {       // diag 1
-        m_winner = one;
-    } else if ((three == five) && (three == seven)) {   // diag 2
+    }
+    if ((three != gameboard::none) && (three == six) && (six == nine)) {
+        m_lines[Lines::col3] = true;
         m_winner = three;
     }
+    if ((one != gameboard::none) && (one == five) && (five == nine)) {
+        m_lines[Lines::diag1] = true;
+        m_winner = one;
+    }
+    if ((three != gameboard::none) && (three == five) && (five == seven)) {
+        m_lines[Lines::diag2] = true;
+        m_winner = three;
+    }
+
     if (m_winner != gameboard::none) {
-        return true;
+        // Draw line(s) across winning row/col/diag
+        emit endRound(m_winner);
     }
     return false;
 
-}
-
-Game::Game() {
-    loadImages();
-    m_winner = gameboard::none;
 }
 
 gameboard::PlayerType Game::getPlayerTurn()

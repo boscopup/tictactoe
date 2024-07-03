@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     playerTurnScene->addPixmap(*Game::xImage);
     scene = new MyScene(this, game);
     connect(game, &Game::updateParentPlayerDisplay, this, &MainWindow::updatePlayerDisplay);
+    connect(game, &Game::endRound, this, &MainWindow::endRound);
     ui->GV_gameBoard->setScene(scene);
     board = new MyBoard();
     scene->setSceneRect(board->boundingRect());
@@ -56,4 +57,11 @@ void MainWindow::updatePlayerDisplay(QPixmap *img)
     ui->GV_currentPlayer->setScene(playerTurnScene);
     ui->GV_currentPlayer->show();
 
+}
+
+void MainWindow::endRound(gameboard::PlayerType winner)
+{
+    qDebug() << "Round over\n";
+    // Update player scores
+    // Pop up dialog with winner to see if they want to play again, otherwise exit
 }

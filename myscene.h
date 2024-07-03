@@ -9,7 +9,7 @@ class MyScene : public QGraphicsScene
     Q_OBJECT
 
 private:
-    Game *m_game;
+    Game *m_game;       // Contents of pointer are deleted in ~MainWindow destructor
 public:
     explicit MyScene(QObject *parent = nullptr, Game *game = nullptr);
 

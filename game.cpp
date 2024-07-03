@@ -21,6 +21,15 @@ Game::Game() {
     m_lines[Lines::diag2] = false;
 }
 
+Game::~Game()
+{
+    delete xImage;
+    delete oImage;
+    for (std::vector::iterator it = m_boxes.begin(); it < m_boxes.end(); it++) {
+        delete m_boxes[it];
+    }
+}
+
 void Game::loadImages()
 {
     if (xImage == nullptr) {

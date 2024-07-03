@@ -23,6 +23,7 @@ private:
 
 public:
     Game();
+    ~Game();
     static gameboard::PlayerType getPlayerTurn();
     static void changePlayerTurn();
     void addBox(MyBox* box);

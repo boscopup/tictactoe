@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete playerTurnScene;
     delete scene;
     delete board;
     delete game;

@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "resources.h"
 #include <QPixmap>
+#include <vector>
 
 QPixmap *Game::xImage = nullptr;
 QPixmap *Game::oImage = nullptr;
@@ -25,8 +26,9 @@ Game::~Game()
 {
     delete xImage;
     delete oImage;
-    for (std::vector::iterator it = m_boxes.begin(); it < m_boxes.end(); it++) {
-        delete m_boxes[it];
+    for (std::vector<MyBox *>::iterator iter = m_boxes.begin(); iter != m_boxes.end();) {
+        delete *iter;
+        m_boxes.erase(iter);    // Don't need to increase iter due to erase
     }
 }
 

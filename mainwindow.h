@@ -31,6 +31,11 @@ private:
     MyScene *scene;
     MyBoard *board;
     Game *game;
+
+    void exitGame();
+    void resetGame();
+    void resetRound();
+
 public slots:
     void updatePlayerDisplay(QPixmap *img);
     void endRound(gameboard::PlayerType winner);

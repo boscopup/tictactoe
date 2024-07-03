@@ -52,6 +52,11 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::exitGame()
+{
+    QCoreApplication::quit();
+}
+
 void MainWindow::updatePlayerDisplay(QPixmap *img)
 {
     qDebug() << "MainWindow updatePlayerDisplay called\n";
@@ -88,11 +93,21 @@ void MainWindow::endRound(gameboard::PlayerType winner)
     if (msgBox.clickedButton() == anotherRoundButton) {
         // Play another round
         qDebug() << "Play another round\n";
+        delete anotherRoundButton;
+        delete resetGameButton;
+        delete exitButton;
     } else if (msgBox.clickedButton() == resetGameButton) {
         // Reset the game
         qDebug() << "Reset the game\n";
+        delete anotherRoundButton;
+        delete resetGameButton;
+        delete exitButton;
     } else if (msgBox.clickedButton() == exitButton) {
         // Exit the game
         qDebug() << "Exit the game\n";
+        delete anotherRoundButton;
+        delete resetGameButton;
+        delete exitButton;
+        exitGame();
     }
 }

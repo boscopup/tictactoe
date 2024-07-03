@@ -67,6 +67,11 @@ MyBox::MyBox(QObject *parent, Game *game, int index)
     setFlag(ItemIsSelectable);
 }
 
+MyBox::~MyBox()
+{
+    qDebug()<< "Deleting box " << boxIndex_ << "\n";
+}
+
 gameboard::PlayerType MyBox::getValue()
 {
     return boxStatus_;

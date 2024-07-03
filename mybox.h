@@ -16,6 +16,7 @@ class MyBox : public QObject, public QGraphicsRectItem
 
 public:
     explicit MyBox(QObject *parent = nullptr, Game *game = nullptr, int index = -1);
+    ~MyBox();
 
     // Header:
 

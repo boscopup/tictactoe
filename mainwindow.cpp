@@ -10,7 +10,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <map>
-#include "myscene.h"
+#include "scene.h"
 #include "box.h"
 
 
@@ -28,11 +28,11 @@ MainWindow::MainWindow(QWidget *parent)
     // Initialize game board
     game = new Game(overlay);
     playerTurnScene->addPixmap(*Game::xImage);
-    scene = new MyScene(this, game);
+    scene = new Scene(this, game);
     connect(game, &Game::updateParentPlayerDisplay, this, &MainWindow::updatePlayerDisplay);
     connect(game, &Game::endRound, this, &MainWindow::endRound);
     ui->GV_gameBoard->setScene(scene);
-    board = new MyBoard();
+    board = new Board();
     scene->setSceneRect(board->boundingRect());
     scene->addItem(board);
 

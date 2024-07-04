@@ -1,14 +1,14 @@
-#ifndef MYBOARD_H
-#define MYBOARD_H
+#ifndef BOARD_H
+#define BOARD_H
 
 #include <QGraphicsRectItem>
 #include <QPainter>
 #include <QObject>
 
-class MyBoard : public QGraphicsRectItem, public QObject
+class Board : public QGraphicsRectItem, public QObject
 {
 public:
-    MyBoard();
+    Board();
 
     // QGraphicsItem interface
 public:
@@ -21,4 +21,4 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 };
 
-#endif // MYBOARD_H
+#endif // Board_H

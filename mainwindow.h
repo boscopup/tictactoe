@@ -5,11 +5,11 @@
 #include <QtCore>
 #include <QtGui>
 #include <vector>
-#include "myboard.h"
+#include "board.h"
 #include "box.h"
 #include "game.h"
 #include "resources.h"
-#include "myscene.h"
+#include "scene.h"
 #include "overlay.h"
 
 QT_BEGIN_NAMESPACE
@@ -29,8 +29,8 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *playerTurnScene;
-    MyScene *scene;
-    MyBoard *board;
+    Scene *scene;
+    Board *board;
     Overlay *overlay;
     Game *game;
 

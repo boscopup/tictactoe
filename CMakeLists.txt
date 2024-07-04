@@ -25,10 +25,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         tictactoe.qrc
         box.h box.cpp
-        myboard.h myboard.cpp
+        board.h board.cpp
         resources.h
         game.h game.cpp
-        myscene.h myscene.cpp
+        scene.h scene.cpp
         overlay.h overlay.cpp
     )
 # Define target properties for Android with Qt 6 as:

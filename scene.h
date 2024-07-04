@@ -1,17 +1,17 @@
-#ifndef MYSCENE_H
-#define MYSCENE_H
+#ifndef SCENE_H
+#define SCENE_H
 
 #include <QGraphicsScene>
 #include "game.h"
 
-class MyScene : public QGraphicsScene
+class Scene : public QGraphicsScene
 {
     Q_OBJECT
 
 private:
     Game *m_game;       // Contents of pointer are deleted in ~MainWindow destructor
 public:
-    explicit MyScene(QObject *parent = nullptr, Game *game = nullptr);
+    explicit Scene(QObject *parent = nullptr, Game *game = nullptr);
 
     // QGraphicsScene interface
 protected:
@@ -24,4 +24,4 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 };
 
-#endif // MYSCENE_H
+#endif // Scene_H

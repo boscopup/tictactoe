@@ -1,21 +1,21 @@
-#include "myboard.h"
+#include "board.h"
 #include "resources.h"
 #include <QPen>
 #include <QGraphicsScene>
 
-MyBoard::MyBoard()
+Board::Board()
 {
     this->setRect(0,0,gameboard::board_width, gameboard::board_width);
     setAcceptedMouseButtons(Qt::NoButton);
 }
 
 
-QRectF MyBoard::boundingRect() const
+QRectF Board::boundingRect() const
 {
     return QRectF(0,0,gameboard::board_width, gameboard::board_width);
 }
 
-void MyBoard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Board::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPen pen;
     pen.setCapStyle(Qt::RoundCap);
@@ -41,12 +41,12 @@ void MyBoard::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 }
 
 
-void MyBoard::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void Board::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "MyBoard mouse press event called\n";
+    qDebug() << "Board mouse press event called\n";
 }
 
-void MyBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void Board::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "MyBoard mouse release event called\n";
+    qDebug() << "Board mouse release event called\n";
 }

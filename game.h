@@ -16,6 +16,7 @@ class Game : public QObject
 private:
     std::vector<MyBox *> m_boxes;
     static gameboard::PlayerType m_playerTurn;
+    gameboard::PlayerType m_startingPlayer;
     Overlay *m_overlay;
     static void loadImages();
     gameboard::PlayerType m_winner;
@@ -25,9 +26,10 @@ private:
 public:
     Game(Overlay *overlay = nullptr);
     ~Game();
-    void resetBoard();
+    void resetBoard(bool resetGame = false);
     static gameboard::PlayerType getPlayerTurn();
     static void changePlayerTurn();
+    void changeStartingPlayer();
     void addBox(MyBox* box);
     MyBox *getBox(QPointF pos);
     static QPixmap* xImage;

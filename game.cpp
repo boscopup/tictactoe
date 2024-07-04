@@ -29,19 +29,18 @@ Game::~Game()
     }
 }
 
-void Game::resetBoard()
+void Game::resetBoard(bool resetGame)
 {
-    // TODO: Remove any lines drawn (lines aren't drawn yet)
-
     // Reset boxes
     for (std::vector<MyBox *>::iterator it = m_boxes.begin(); it != m_boxes.end(); it++) {
         (*it)->resetBox();
     }
 
-    // Set current player to X
-    m_playerTurn = gameboard::x;
     m_winner = gameboard::none;
 
+    if (resetGame) {
+        m_startingPlayer = gameboard::x;
+    }
 }
 
 void Game::loadImages()
@@ -146,6 +145,8 @@ bool Game::isWinner()
 void Game::initializeMembers()
 {
     m_winner = gameboard::none;
+    m_playerTurn = gameboard::x;
+    m_startingPlayer = gameboard::x;
 }
 
 gameboard::PlayerType Game::getPlayerTurn()
@@ -159,6 +160,17 @@ void Game::changePlayerTurn()
         m_playerTurn = gameboard::o;
     } else {
         m_playerTurn = gameboard::x;
+    }
+}
+
+void Game::changeStartingPlayer()
+{
+    if (m_startingPlayer == gameboard::x) {
+        m_startingPlayer = gameboard::o;
+        m_playerTurn = gameboard::o;
+    } else {
+        m_startingPlayer = gameboard::x;
+        m_startingPlayer = gameboard::x;
     }
 }
 

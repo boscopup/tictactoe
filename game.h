@@ -33,6 +33,7 @@ public:
     MyBox *getBox(QPointF pos);
     static QPixmap* xImage;
     static QPixmap* oImage;
+    static QPixmap* xoImage;
 
 signals:
     void updateParentPlayerDisplay(QPixmap *img);

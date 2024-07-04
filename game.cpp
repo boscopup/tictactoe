@@ -7,6 +7,7 @@
 
 QPixmap *Game::xImage = nullptr;
 QPixmap *Game::oImage = nullptr;
+QPixmap *Game::xoImage = nullptr;
 gameboard::PlayerType Game::m_playerTurn = gameboard::x;
 
 Game::Game() {
@@ -18,6 +19,7 @@ Game::~Game()
 {
     delete xImage;
     delete oImage;
+    delete xoImage;
     for (std::vector<MyBox *>::iterator iter = m_boxes.begin(); iter != m_boxes.end();) {
         delete *iter;
         m_boxes.erase(iter);    // Don't need to increase iter due to erase
@@ -53,6 +55,13 @@ void Game::loadImages()
         qDebug() << "Loading oImage\n";
         if (oImage->isNull()) {
             qDebug() << "Loading oImage FAILED\n";
+        }
+    }
+    if (xoImage == nullptr) {
+        xoImage = new QPixmap(":/Resources/xo.png");
+        qDebug() << "Loading xoImage\n";
+        if (xoImage->isNull()) {
+            qDebug() << "Loading xoImage FAILED\n";
         }
     }
 }
@@ -106,6 +115,13 @@ bool Game::isWinner()
     if (m_winner != gameboard::none) {
         // TODO: Draw line(s) across winning row/col/diag
         emit endRound(m_winner);
+    } else {
+        // Check for tie game
+        if (!((one == gameboard::none) || (two == gameboard::none) || (three == gameboard::none) ||
+            (four == gameboard::none) || (five == gameboard::none) || (six == gameboard::none) ||
+             (seven == gameboard::none) || (eight == gameboard::none) || (nine == gameboard::none))) {
+            emit endRound(m_winner);
+        }
     }
     return false;
 

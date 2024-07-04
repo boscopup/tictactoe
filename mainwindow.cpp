@@ -78,9 +78,12 @@ void MainWindow::endRound(gameboard::PlayerType winner)
     if (winner == gameboard::x) {
         msg = "X won!";
         img = Game::xImage;
-    } else {
+    } else if (winner == gameboard::o) {
         msg = "O won!";
         img = Game::oImage;
+    } else {
+        msg = "Tie game!";
+        img = Game::xoImage;
     }
     msgBox.setText(msg);
     msgBox.setInformativeText("Would you like to play another round?");

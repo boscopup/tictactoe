@@ -118,7 +118,7 @@ font: 700 12pt &quot;Roboto&quot;;</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLabel" name="labelScoreY">
+        <widget class="QLabel" name="labelScoreO">
          <property name="styleSheet">
           <string notr="true">qproperty-alignment: AlignCenter;
 background-color: rgb(62, 197, 243);

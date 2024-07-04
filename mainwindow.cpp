@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QLabel>
 #include "myscene.h"
 
 
@@ -76,9 +77,19 @@ void MainWindow::endRound(gameboard::PlayerType winner)
     QString msg;
     QPixmap *img;
     if (winner == gameboard::x) {
+        QString txt = ui->labelScoreX->text();
+        int score = txt.toInt();
+        score++;
+        txt = QString::number(score);
+        ui->labelScoreX->setText(txt);
         msg = "X won!";
         img = Game::xImage;
     } else if (winner == gameboard::o) {
+        QString txt = ui->labelScoreO->text();
+        int score = txt.toInt();
+        score++;
+        txt = QString::number(score);
+        ui->labelScoreO->setText(txt);
         msg = "O won!";
         img = Game::oImage;
     } else {

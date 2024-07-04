@@ -10,7 +10,10 @@ QPixmap *Game::oImage = nullptr;
 QPixmap *Game::xoImage = nullptr;
 gameboard::PlayerType Game::m_playerTurn = gameboard::x;
 
-Game::Game() {
+Game::Game(Overlay *overlay) {
+    if (overlay != nullptr) {
+        m_overlay = overlay;
+    }
     loadImages();
     initializeMembers();
 }
@@ -68,6 +71,18 @@ void Game::loadImages()
 
 bool Game::isWinner()
 {
+    std::map<QString, bool> lines =
+    {
+        {"row1", false},
+        {"row2", false},
+        {"row3", false},
+        {"col1", false},
+        {"col2", false},
+        {"col3", false},
+        {"diag1", false},
+        {"diag2", false}
+    };
+
     gameboard::PlayerType one, two, three, four, five, six, seven, eight, nine;
     one = m_boxes[0]->getValue();
     two = m_boxes[1]->getValue();
@@ -80,40 +95,41 @@ bool Game::isWinner()
     nine = m_boxes[8]->getValue();
 
     if ((one != gameboard::none) && (one == two) && (two == three)) {
-        m_lines[Lines::row1] = true;
+        lines["row1"] = true;
         m_winner = one;
     }
     if ((four != gameboard::none) && (four == five) && (five == six)) {
-        m_lines[Lines::row2] = true;
+        lines["row2"] = true;
         m_winner = four;
     }
     if ((seven != gameboard::none) && (seven == eight) && (eight == nine)) {
-        m_lines[Lines::row3] = true;
+        lines["row3"] = true;
         m_winner = seven;
     }
     if ((one != gameboard::none) && (one == four) && (four == seven)) {
-        m_lines[Lines::col1] = true;
+        lines["col1"] = true;
         m_winner = one;
     }
     if ((two != gameboard::none) && (two == five) && (five == eight)) {
-        m_lines[Lines::col2] = true;
+        lines["col2"] = true;
         m_winner = two;
     }
     if ((three != gameboard::none) && (three == six) && (six == nine)) {
-        m_lines[Lines::col3] = true;
+        lines["col3"] = true;
         m_winner = three;
     }
     if ((one != gameboard::none) && (one == five) && (five == nine)) {
-        m_lines[Lines::diag1] = true;
+        lines["diag1"] = true;
         m_winner = one;
     }
     if ((three != gameboard::none) && (three == five) && (five == seven)) {
-        m_lines[Lines::diag2] = true;
+        lines["diag2"] = true;
         m_winner = three;
     }
 
     if (m_winner != gameboard::none) {
         // TODO: Draw line(s) across winning row/col/diag
+        m_overlay->setLines(lines);
         emit endRound(m_winner);
     } else {
         // Check for tie game
@@ -130,14 +146,6 @@ bool Game::isWinner()
 void Game::initializeMembers()
 {
     m_winner = gameboard::none;
-    m_lines[Lines::row1] = false;
-    m_lines[Lines::row2] = false;
-    m_lines[Lines::row3] = false;
-    m_lines[Lines::col1] = false;
-    m_lines[Lines::col2] = false;
-    m_lines[Lines::col3] = false;
-    m_lines[Lines::diag1] = false;
-    m_lines[Lines::diag2] = false;
 }
 
 gameboard::PlayerType Game::getPlayerTurn()

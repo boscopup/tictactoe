@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include <map>
 #include "mybox.h"
+#include "overlay.h"
 
 class MyBox; // Game holds a vector of MyBox pointers, and MyBox holds a Game pointer
 
@@ -15,18 +16,16 @@ class Game : public QObject
 private:
     std::vector<MyBox *> m_boxes;
     static gameboard::PlayerType m_playerTurn;
+    Overlay *m_overlay;
     static void loadImages();
     gameboard::PlayerType m_winner;
     bool isWinner();
-    enum class Lines {row1, row2, row3, col1, col2, col3, diag1, diag2};
-    std::map<Lines, bool> m_lines;
     void initializeMembers();
 
 public:
-    Game();
+    Game(Overlay *overlay = nullptr);
     ~Game();
     void resetBoard();
-    void resetGame();
     static gameboard::PlayerType getPlayerTurn();
     static void changePlayerTurn();
     void addBox(MyBox* box);

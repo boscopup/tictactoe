@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QLabel>
+#include <map>
 #include "myscene.h"
 
 
@@ -20,8 +21,11 @@ MainWindow::MainWindow(QWidget *parent)
     playerTurnScene = new QGraphicsScene(this);
     ui->GV_currentPlayer->setScene(playerTurnScene);
 
+    // Initialize overlay (lines that go across winning boxes)
+    overlay = new Overlay();
+
     // Initialize game board
-    game = new Game();
+    game = new Game(overlay);
     playerTurnScene->addPixmap(*Game::xImage);
     scene = new MyScene(this, game);
     connect(game, &Game::updateParentPlayerDisplay, this, &MainWindow::updatePlayerDisplay);
@@ -41,11 +45,13 @@ MainWindow::MainWindow(QWidget *parent)
         scene->addItem(box);
         connect(box, &MyBox::handleBoxChangedEvent, game, &Game::handlePlayerSelectionMade);
     }
+    scene->addItem(overlay);
 }
 
 MainWindow::~MainWindow()
 {
     delete playerTurnScene;
+    delete overlay;
     delete scene;
     delete board;
     delete game;
@@ -104,6 +110,8 @@ void MainWindow::endRound(gameboard::PlayerType winner)
     QPushButton *exitButton = msgBox.addButton(tr("Exit Game"), QMessageBox::AcceptRole);
     msgBox.exec();
 
+    overlay->clearLines();
+
     if (msgBox.clickedButton() == anotherRoundButton) {
         // Play another round
         qDebug() << "Play another round\n";
@@ -117,6 +125,9 @@ void MainWindow::endRound(gameboard::PlayerType winner)
         delete anotherRoundButton;
         delete resetGameButton;
         delete exitButton;
+        ui->labelScoreX->setText("0");
+        ui->labelScoreO->setText("0");
+        game->resetBoard();
     } else if (msgBox.clickedButton() == exitButton) {
         // Exit the game
         qDebug() << "Exit the game\n";

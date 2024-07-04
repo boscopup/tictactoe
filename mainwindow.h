@@ -10,6 +10,7 @@
 #include "game.h"
 #include "resources.h"
 #include "myscene.h"
+#include "overlay.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,6 +31,7 @@ private:
     QGraphicsScene *playerTurnScene;
     MyScene *scene;
     MyBoard *board;
+    Overlay *overlay;
     Game *game;
 
     void exitGame();

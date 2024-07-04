@@ -6,7 +6,7 @@
 #include <QtGui>
 #include <vector>
 #include "myboard.h"
-#include "mybox.h"
+#include "box.h"
 #include "game.h"
 #include "resources.h"
 #include "myscene.h"

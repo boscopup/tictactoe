@@ -24,7 +24,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         tictactoe.qrc
-        mybox.h mybox.cpp
+        box.h box.cpp
         myboard.h myboard.cpp
         resources.h
         game.h game.cpp

@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <map>
 #include "myscene.h"
+#include "box.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -37,13 +38,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // Set up the 9 boxes where the X and O will go
-    MyBox* box;
+    Box* box;
     int boxIndex = 1;
     for (int i = 0; i < 9; i++) {
-        box = new MyBox(scene, game, i+1);
+        box = new Box(scene, game, i+1);
         game->addBox(box);
         scene->addItem(box);
-        connect(box, &MyBox::handleBoxChangedEvent, game, &Game::handlePlayerSelectionMade);
+        connect(box, &Box::handleBoxChangedEvent, game, &Game::handlePlayerSelectionMade);
     }
     scene->addItem(overlay);
 }

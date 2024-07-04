@@ -23,7 +23,7 @@ Game::~Game()
     delete xImage;
     delete oImage;
     delete xoImage;
-    for (std::vector<MyBox *>::iterator iter = m_boxes.begin(); iter != m_boxes.end();) {
+    for (std::vector<Box *>::iterator iter = m_boxes.begin(); iter != m_boxes.end();) {
         delete *iter;
         m_boxes.erase(iter);    // Don't need to increase iter due to erase
     }
@@ -32,7 +32,7 @@ Game::~Game()
 void Game::resetBoard(bool resetGame)
 {
     // Reset boxes
-    for (std::vector<MyBox *>::iterator it = m_boxes.begin(); it != m_boxes.end(); it++) {
+    for (std::vector<Box *>::iterator it = m_boxes.begin(); it != m_boxes.end(); it++) {
         (*it)->resetBox();
     }
 
@@ -175,7 +175,7 @@ void Game::changeStartingPlayer()
     }
 }
 
-void Game::addBox(MyBox *box)
+void Game::addBox(Box *box)
 {
     m_boxes.push_back(box);
 }
@@ -205,12 +205,12 @@ void Game::handlePlayerSelectionMade()
     }
 }
 
-MyBox *Game::getBox(QPointF pos)
+Box *Game::getBox(QPointF pos)
 {
     qreal x = pos.rx();
     qreal y = pos.ry();
 
-    MyBox *box;
+    Box *box;
     if (x < gameboard::box1_end) {
         // bpxes 1, 4, or 7
         if (y < gameboard::box1_end) {

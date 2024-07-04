@@ -1,4 +1,4 @@
-#include "mybox.h"
+#include "box.h"
 #include <QtCore>
 #include <QObject>
 #include <QGraphicsItem>
@@ -8,7 +8,7 @@
 #include "resources.h"
 #include "game.h"
 
-MyBox::MyBox(QObject *parent, Game *game, int index)
+Box::Box(QObject *parent, Game *game, int index)
 {
     m_game = game;
     int x = 0;
@@ -67,28 +67,28 @@ MyBox::MyBox(QObject *parent, Game *game, int index)
     setFlag(ItemIsSelectable);
 }
 
-MyBox::~MyBox()
+Box::~Box()
 {
     qDebug()<< "Deleting box " << m_boxIndex << "\n";
 }
 
-void MyBox::resetBox()
+void Box::resetBox()
 {
     boxStatus_ = gameboard::none;
     update();
 }
 
-gameboard::PlayerType MyBox::getValue()
+gameboard::PlayerType Box::getValue()
 {
     return boxStatus_;
 }
 
-QRectF MyBox::boundingRect() const
+QRectF Box::boundingRect() const
 {
     return QRectF(0, 0, gameboard::box_width, gameboard::box_width);
 }
 
-void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Box::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRect rec = this->boundingRect().toRect();
     switch(boxStatus_) {
@@ -104,12 +104,12 @@ void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     }
 }
 
-void MyBox::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void Box::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     m_pressed = true;
 }
 
-void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void Box::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (m_pressed) {
         m_pressed = false;

@@ -1,5 +1,5 @@
-#ifndef MYBOX_H
-#define MYBOX_H
+#ifndef BOX_H
+#define BOX_H
 
 #include <QObject>
 #include <QAbstractItemModel>
@@ -8,15 +8,15 @@
 #include <QPainter>
 #include "resources.h"
 
-class Game; // Game holds a vector of MyBox pointers, and MyBox holds a Game pointer
+class Game; // Game holds a vector of Box pointers, and Box holds a Game pointer
 
-class MyBox : public QObject, public QGraphicsRectItem
+class Box : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 
 public:
-    explicit MyBox(QObject *parent = nullptr, Game *game = nullptr, int index = -1);
-    ~MyBox();
+    explicit Box(QObject *parent = nullptr, Game *game = nullptr, int index = -1);
+    ~Box();
     void resetBox();
     // Header:
 
@@ -44,4 +44,4 @@ signals:
     // QGraphicsItem interface
 };
 
-#endif // MYBOX_H
+#endif // Box_H

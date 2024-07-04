@@ -5,16 +5,16 @@
 #include <QObject>
 #include <QPixmap>
 #include <map>
-#include "mybox.h"
+#include "box.h"
 #include "overlay.h"
 
-class MyBox; // Game holds a vector of MyBox pointers, and MyBox holds a Game pointer
+class Box; // Game holds a vector of Box pointers, and Box holds a Game pointer
 
 class Game : public QObject
 {
     Q_OBJECT
 private:
-    std::vector<MyBox *> m_boxes;
+    std::vector<Box *> m_boxes;
     static gameboard::PlayerType m_playerTurn;
     gameboard::PlayerType m_startingPlayer;
     Overlay *m_overlay;
@@ -30,8 +30,8 @@ public:
     static gameboard::PlayerType getPlayerTurn();
     static void changePlayerTurn();
     void changeStartingPlayer();
-    void addBox(MyBox* box);
-    MyBox *getBox(QPointF pos);
+    void addBox(Box* box);
+    Box *getBox(QPointF pos);
     static QPixmap* xImage;
     static QPixmap* oImage;
     static QPixmap* xoImage;

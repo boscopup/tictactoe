@@ -1,7 +1,7 @@
 #include "myscene.h"
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
-#include "mybox.h"
+#include "box.h"
 #include "game.h"
 
 
@@ -15,7 +15,7 @@ void MyScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     qDebug() << "Scene mousePressEvent\n";
     qDebug() << "Position: " << event->scenePos() << "\n";
-    MyBox *box = m_game->getBox(event->scenePos());
+    Box *box = m_game->getBox(event->scenePos());
     if (box->getValue() == gameboard::none) {
         box->mousePressEvent(event);
     }
@@ -24,7 +24,7 @@ void MyScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void MyScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     qDebug() << "Scene mouseReleaseEvent\n";
-    MyBox *box = m_game->getBox(event->scenePos());
+    Box *box = m_game->getBox(event->scenePos());
     if (box->getValue() == gameboard::none) {
         box->mouseReleaseEvent(event);
     }

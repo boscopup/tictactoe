@@ -96,6 +96,7 @@ void MainWindow::endRound(gameboard::PlayerType winner)
         delete anotherRoundButton;
         delete resetGameButton;
         delete exitButton;
+        game->resetBoard();
     } else if (msgBox.clickedButton() == resetGameButton) {
         // Reset the game
         qDebug() << "Reset the game\n";

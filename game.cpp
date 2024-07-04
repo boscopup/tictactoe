@@ -11,15 +11,7 @@ gameboard::PlayerType Game::m_playerTurn = gameboard::x;
 
 Game::Game() {
     loadImages();
-    m_winner = gameboard::none;
-    m_lines[Lines::row1] = false;
-    m_lines[Lines::row2] = false;
-    m_lines[Lines::row3] = false;
-    m_lines[Lines::col1] = false;
-    m_lines[Lines::col2] = false;
-    m_lines[Lines::col3] = false;
-    m_lines[Lines::diag1] = false;
-    m_lines[Lines::diag2] = false;
+    initializeMembers();
 }
 
 Game::~Game()
@@ -30,6 +22,21 @@ Game::~Game()
         delete *iter;
         m_boxes.erase(iter);    // Don't need to increase iter due to erase
     }
+}
+
+void Game::resetBoard()
+{
+    // TODO: Remove any lines drawn (lines aren't drawn yet)
+
+    // Reset boxes
+    for (std::vector<MyBox *>::iterator it = m_boxes.begin(); it != m_boxes.end(); it++) {
+        (*it)->resetBox();
+    }
+
+    // Set current player to X
+    m_playerTurn = gameboard::x;
+    m_winner = gameboard::none;
+
 }
 
 void Game::loadImages()
@@ -102,6 +109,19 @@ bool Game::isWinner()
     }
     return false;
 
+}
+
+void Game::initializeMembers()
+{
+    m_winner = gameboard::none;
+    m_lines[Lines::row1] = false;
+    m_lines[Lines::row2] = false;
+    m_lines[Lines::row3] = false;
+    m_lines[Lines::col1] = false;
+    m_lines[Lines::col2] = false;
+    m_lines[Lines::col3] = false;
+    m_lines[Lines::diag1] = false;
+    m_lines[Lines::diag2] = false;
 }
 
 gameboard::PlayerType Game::getPlayerTurn()

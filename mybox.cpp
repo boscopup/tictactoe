@@ -72,6 +72,12 @@ MyBox::~MyBox()
     qDebug()<< "Deleting box " << boxIndex_ << "\n";
 }
 
+void MyBox::resetBox()
+{
+    boxStatus_ = gameboard::none;
+    update();
+}
+
 gameboard::PlayerType MyBox::getValue()
 {
     return boxStatus_;
@@ -87,7 +93,7 @@ void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     QRect rec = this->boundingRect().toRect();
     switch(boxStatus_) {
     case gameboard::none:
-        // Don't draw anything
+        painter->eraseRect(rec);
         break;
     case gameboard::x:
         painter->drawPixmap(rec, *Game::xImage);

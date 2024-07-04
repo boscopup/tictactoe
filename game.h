@@ -20,10 +20,13 @@ private:
     bool isWinner();
     enum class Lines {row1, row2, row3, col1, col2, col3, diag1, diag2};
     std::map<Lines, bool> m_lines;
+    void initializeMembers();
 
 public:
     Game();
     ~Game();
+    void resetBoard();
+    void resetGame();
     static gameboard::PlayerType getPlayerTurn();
     static void changePlayerTurn();
     void addBox(MyBox* box);

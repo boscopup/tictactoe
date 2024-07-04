@@ -24,8 +24,8 @@ public:
 private:
 
     gameboard::PlayerType boxStatus_;
-    int boxIndex_;
-    bool pressed_;
+    int m_boxIndex;
+    bool m_pressed;
     Game *m_game;       // Contents of pointer are deleted in ~MainWindow destructor
 
     // QGraphicsItem interface

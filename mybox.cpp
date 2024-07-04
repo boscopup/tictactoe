@@ -14,7 +14,7 @@ MyBox::MyBox(QObject *parent, Game *game, int index)
     int x = 0;
     int y = 0;
 
-    boxIndex_ = index;
+    m_boxIndex = index;
     boxStatus_ = gameboard::none;
 
     // For boxes 1-3, y is box1_start
@@ -69,7 +69,7 @@ MyBox::MyBox(QObject *parent, Game *game, int index)
 
 MyBox::~MyBox()
 {
-    qDebug()<< "Deleting box " << boxIndex_ << "\n";
+    qDebug()<< "Deleting box " << m_boxIndex << "\n";
 }
 
 void MyBox::resetBox()
@@ -106,13 +106,13 @@ void MyBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 void MyBox::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    pressed_ = true;
+    m_pressed = true;
 }
 
 void MyBox::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (pressed_) {
-        pressed_ = false;
+    if (m_pressed) {
+        m_pressed = false;
         if (Game::getPlayerTurn() == gameboard::x) {
             boxStatus_ = gameboard::x;
         } else {

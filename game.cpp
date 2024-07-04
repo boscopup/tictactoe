@@ -40,6 +40,7 @@ void Game::resetBoard(bool resetGame)
 
     if (resetGame) {
         m_startingPlayer = gameboard::x;
+        m_playerTurn = gameboard::x;
     }
 }
 

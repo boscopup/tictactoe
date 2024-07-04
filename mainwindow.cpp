@@ -128,7 +128,7 @@ void MainWindow::endRound(gameboard::PlayerType winner)
         delete exitButton;
         ui->labelScoreX->setText("0");
         ui->labelScoreO->setText("0");
-        game->resetBoard();
+        game->resetBoard(true);
     } else if (msgBox.clickedButton() == exitButton) {
         // Exit the game
         qDebug() << "Exit the game\n";
